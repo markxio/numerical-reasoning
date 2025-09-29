@@ -1,0 +1,37 @@
+{
+	"split_sentences": {
+		"raw_filings_folder": "../edgar-crawler/datasets/EXTRACTED_FILINGS_DOW_JONES/10-K",
+		"enable_threading": true,
+		"parallel_processes": "72",
+		"sentences_folder": "SENTENCES_DOW_JONES_NEW/10-K",
+		"sentence_min_length": "80",
+		"spacy_labels_to_include": ["MONEY", "CARDINAL", "PERCENT", "QUANTITY"]
+	},
+	"generate_question_answer": {
+		"sentences_folder": "SENTENCES_DOW_JONES/10-K",
+		"question_answer_folder": "QA_DOW_JONES",
+        "check_already_processed": true,
+		"sentence_min_length": 50,
+        "api_key_file": "google_api_key.json",
+        "model_name": "gemini-2.5-pro-preview-06-05",
+        "model_name_previously_used": "gemini-2.5-pro-preview-05-06"
+	},
+	"filter": {
+		"question_answer_folder": "QA_DOW_JONES",
+		"filter_folder": "FILTER",
+		"sentence_filters": ["^[A-Z]{1}[a-z]{1}"],
+		"answer_max_length": 20,
+		"counter_map_file": "FILTER_counter_map.json",
+		"label_map_file": "FILTER_label_map.json",
+		"label_map_counts_only_file": "FILTER_label_map_counts_only.json",
+		"enable_threading": true,
+		"parallel_processes": "72"
+	},
+    "filter_post_processing": {},
+    "generate_task_2": {
+        "json_response_dir": "TASK_2",
+        "model_name": "gemini-2.5-pro-preview-06-05",
+        "model_name_previously_used": "gemini-2.5-pro-preview-05-06"
+    },
+    "generate_task_2_post_processing": {}
+}

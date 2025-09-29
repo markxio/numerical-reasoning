@@ -29,9 +29,11 @@ Are listed in [`generate_dataset/README.md`](generate_dataset/README.md).
 
 ### Install Python packages
 
-Use the `requirements.txt` to install necessary Python packages. Any Python3 version should work, we used Python 3.12.1:
+Use the `requirements.txt` to install necessary Python packages. Any Python3 version should work, we used Python 3.12.1. We recommend installing Python packages into a virtualenv:
 
 ```
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 

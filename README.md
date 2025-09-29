@@ -15,7 +15,7 @@ Each annual 10-K filing document is composed of indexed legal items, comparable 
 
 Our benchmark comprises five tasks. An example instance is shown in the figure below, where the extracted sentence, which we refer to as *short context*, describes the value of a financial metric across two subsequent years, specifically *debt and equity securities and other investments* in 2022 and 2023. Based on the extracted sentence, two entity extraction tasks, task 1 and 2, are constructed, targeted at the financial metric and the contained years (fixed queries). Task 3 probes the financial metric value from the earlier year. The remaining two tasks, 4 and 5, focus on numerical reasoning, probing the quantitative change, whether the metric increased, decreased, or stayed constant, and on the absolute qualitative change. Our benchmark dataset includes the five task queries (Q1–Q5) along with their corresponding human-reviewed answers (A1–A5). All answers were manually verified by the authors of this paper.
 
-![Five tasks probing numerical reasoning](numerical_reasoning_example.png)
+![Five tasks probing numerical reasoning](figs/numerical_reasoning_example.png)
 
 To illustrate the short context setting, we construct an example where the task is to identify a reported financial metric along with the years in which it was reported. From these ground-truth answers (A1 and A2), we derive more realistic tasks that mirror the kinds of questions practitioners ask when analyzing annual 10-K filings. In practice, experts review 10-K filings item by item, which is why our benchmark also provides the full legal items as *long context*.
 

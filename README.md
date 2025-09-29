@@ -5,7 +5,7 @@ We introduce PROFIT (Processing and Reasoning Over Financial Information in Text
 Our main contributions are as follows: 
 - A corpus of 10-K annual filings submitted to the SEC by the 30 corporations represented in the Dow Jones Industrial Average Index, ranging from the reported years of 1993 to 2024, including question-answer annotations;
 - A new benchmark comprising five tasks of increasing complexity, including numeric entity extraction and qualitative and quantitative numerical reasoning in dense legal and financial texts;
-- A detailed evaluation of LLMs' abilities to perform these numerical reasoning tasks on our dataset. %of annual 10-K filings from the 30 companies listed in the Dow Jones Industrial Average Index from 1993 to 2024. 
+- A detailed evaluation of LLMs' abilities to perform these numerical reasoning tasks on our dataset.  
 
 ## Dataset
 

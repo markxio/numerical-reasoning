@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: tklaisoo-eidf107-job-
+  labels:
+    eidf/user: tklaisoo-eidf107
+    kueue.x-k8s.io/queue-name: eidf107ns-user-queue 
+    kueue.x-k8s.io/priority-class: batch-workload-priority
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        eidf/user: tklaisoo-eidf107
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:latest
+        imagePullPolicy: IfNotPresent
+        workingDir: "/workspace"
+        command: ["/bin/bash", "./run.sh"]
+        env:
+          - name: MY_USERNAME
+            value: tklaisoo-eidf107
+          - name: MY_EXPERIMENT 
+            value: experiment1
+        ports:
+          - containerPort: 8000
+        resources:
+           limits:
+            nvidia.com/gpu: 1
+            cpu: 32
+            memory: 512Gi
+        volumeMounts:
+          - name: workspace
+            mountPath: /workspace
+            readOnly: true
+          - name: writeable
+            mountPath: /workspace/writeable
+          - name: publicdata
+            mountPath: /public
+            readOnly: true
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-H200
+      volumes:
+        - name: workspace
+          nfs:
+            server: 10.24.6.77 
+            path: /user/tklaisoo-eidf107
+        - name: writeable
+          persistentVolumeClaim:
+             claimName: tklaisoo-eidf107-ws1
+        - name: publicdata
+          nfs:
+            server: 10.24.1.255
+            path: /public

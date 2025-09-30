@@ -22,3 +22,6 @@ python eval_metric.py ${GOLDEN} "${TEST_PREFIX}_gpt-4.1.csv"             >> ${OU
 python eval_metric.py ${GOLDEN} "${TEST_PREFIX}_gpt-4.1-mini.csv"        >> ${OUTPUT_FILE} 
 python eval_metric.py ${GOLDEN} "${TEST_PREFIX}_gpt-4.1-nano.csv"        >> ${OUTPUT_FILE} 
 python eval_metric.py ${GOLDEN} "${TEST_PREFIX}_gpt-4o.csv"              >> ${OUTPUT_FILE} 
+
+# meta llama models
+python eval_metric.py ${GOLDEN} "${TEST_PREFIX}_meta-llama-llama-4-scout-17b-16e.csv" >> ${OUTPUT_FILE} 

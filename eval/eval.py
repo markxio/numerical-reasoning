@@ -85,7 +85,7 @@ def eval(long_context, vendor, api_key, model_name):
         dataset["task_4_answer"] = answers[3]
         dataset["task_5_answer"] = answers[4]
 
-    dataset.to_csv(f"dataset{slug}_eval_{model_name}.csv", sep=";", index=False)
+    dataset.to_csv(f"dataset{slug}_eval_{model_name.lower().replace('/', '-')}.csv", sep=";", index=False)
     
 # structured json output
 # https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat
@@ -155,6 +155,19 @@ def send_request(system_content, user_content, vendor, api_key, model_name, resp
                 print("Other error:", e)
                 print(completion.choices[0].message)
                 raise            
+    elif "meta" in vendor:
+        client = OpenAI(
+            api_key=api_key,
+            base_url="http://localhost:8000/v1"
+        )
+        completion = client.beta.chat.completions.parse(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user_content},
+            ],
+            response_format=response_format #QuestionAnswer
+        )
     else:
         raise ValueError("The API provider/vendor couldnt be identified (We can use the OpenAI python library to address the Google Gemini API).")
 
@@ -197,6 +210,9 @@ def main():
         elif "gemini" in model_name:
             vendor="google"
             api_key = api_keys["google"]
+        elif "meta" in model_name:
+            vendor="meta"
+            api_key = "none"
         else:
             raise ValueError("The model name couldnt be identified (We can use the OpenAI python library to address the Google Gemini API).")
         eval(long_context, vendor, api_key, model_name)
